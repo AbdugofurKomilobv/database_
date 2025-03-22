@@ -4,6 +4,14 @@ import os
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 
+from django.contrib.auth.models import User
+
+
+
+class UserModel(models.Model):
+    ...
+
+
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,12 +70,14 @@ class Employes(BaseModel):
     data_fild = models.FileField(upload_to='uplods/',validators=[validate_file_extension])
    
 
-    fk_departamen = models.ForeignKey(Departament,on_delete=models.CASCADE)
-    fk_region = models.ForeignKey(Region,on_delete=models.CASCADE)
+    fk_departamen = models.ForeignKey(Departament,on_delete=models.CASCADE,related_name='departament')
+    fk_region = models.ForeignKey(Region,on_delete=models.CASCADE,related_name='region')
 
 
     def __str__(self):
         return self.last_name
+    
+
     
 
 
